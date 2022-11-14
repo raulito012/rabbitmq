@@ -3,7 +3,7 @@ const amqp = require("amqplib");
 const rabbitSettings = {
     protocol: 'amqp',
     hostname: 'localhost',
-    port: 5672,
+    port: 5673,
     username: 'guest',
     password: 'guest',
     vhost: '/',
@@ -30,13 +30,13 @@ async function connect(){
         const res = await channel.assertQueue(queue);
         console.log("Queue creado...");
 
-        console.log('Esperando por mensajes from ${Universidad}');
+        console.log('Esperando por mensajes from ${Dato}');
         channel.consume(queue, message => {
             let Algoritmo = JSON.parse(message.content.toString());
             console.log('Algoritmo recibido ${Algoritmo.name}');
             console.log(Algoritmo);
 
-            if(Algoritmo.Universidad == Universidad){
+            if(Algoritmo.Dato == Dato){
                 channel.ack(message);
                 console.log("Mensaje borrado de la cola... \n");
                 
