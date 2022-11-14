@@ -33,24 +33,15 @@ async function connect(){
         const channel = await conn.createChannel();
         console.log("Channel Created...");
 
-        let res = await channel.assertQueue(queue);
+        const res = await channel.assertQueue(queue);
         console.log("Queue Created...");
 
         for(let msg in msgs){
-            await channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg[msgs])));
+            await channel.sendToQueue(queue, Buffer.from(JSON.stringify(msgs[msg])));
             console.log('Mensaje enviado a la cola ${queue}');
         }
 
-        res = await channel.assertQueue(newQueue);
-        console.log("Queue Created...");
-
-        for(let msg in msgs){
-            await channel.sendToQueue(newQueue, Buffer.from(JSON.stringify(msg[msgs])));
-            console.log('Mensaje enviado a la cola ${newQueue}');
-        }
-
-        
-
+  
 
     } catch(err){
         console.error('Error -> $(err)');
