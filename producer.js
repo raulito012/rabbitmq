@@ -37,7 +37,7 @@ async function connect(){
         console.log("Queue Created...");
 
         for(let msg in msgs){
-            await channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg[msgs])));
+            await channel.sendToQueue(queue, Buffer.from(JSON.stringify(msgs[msg])));
             console.log('Mensaje enviado a la cola ${queue}');
         }
 
