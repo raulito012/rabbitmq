@@ -28,10 +28,10 @@ async function connect(){
     const queue = "AP";
     const Universidad = "UTESA"
 
-     
+    for(i=0;i<rabbitSettings.length;i++){
     try{
         
-        const conn = await amqp.connect(rabbitSettings);
+        const conn = await amqp.connect(rabbitSettings[i]);
         console.log("Conexion creada...");
 
         const channel = await conn.createChannel();
@@ -57,8 +57,9 @@ async function connect(){
 
         })
 
-
+        break
     } catch(err){
         console.error('Error -> $(err)');
     }
+}
 }
