@@ -25,7 +25,7 @@ connect();
 
 async function connect(){
 
-    const queue = "Algoritmos";
+    const queue = "AP";
     const Universidad = "UTESA"
 
      
@@ -40,13 +40,13 @@ async function connect(){
         const res = await channel.assertQueue(queue);
         console.log("Queue creado...");
 
-        console.log('Esperando por mensajes from ${Universidad}');
+        console.log('Esperando por mensajes de ${Universidad}');
         channel.consume(queue, message => {
-            let Algoritmo = JSON.parse(message.content.toString());
-            console.log('Algoritmo recibido ${Algoritmo.name}');
+            let AP = JSON.parse(message.content.toString());
+            console.log('AP recibido ${AP.name}');
             console.log(Algoritmo);
 
-            if(Algoritmo.Universidad == Universidad){
+            if(AP.Universidad == Universidad){
                 channel.ack(message);
                 console.log("Mensaje borrado de la cola... \n");
                 
