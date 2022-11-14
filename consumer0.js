@@ -50,10 +50,7 @@ async function connect(){
                 channel.ack(message);
                 console.log("Mensaje borrado de la cola... \n");
                 
-            } else{
-                console.log("Ese mensaje no es para mi, por lo tanto, no lo borrare.");
-            }
-
+            } 
 
         })
 
