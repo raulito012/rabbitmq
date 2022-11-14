@@ -24,10 +24,11 @@ async function connect(){
         {   "name":"Jose Quezada", "Edad":"22"},
         {   "name":"Jose Quezada", "Carrera":"Sistemas"},
     ]
-
+    
+     for(i=0;i<rabbitSettings.length;i++){
     try{
 
-        const conn = await amqp.connect(rabbitSettings);
+        const conn = await amqp.connect(rabbitSettings[i]);
         console.log("Se ha creado la conexion...");
 
         const channel = await conn.createChannel();
@@ -46,4 +47,4 @@ async function connect(){
     } catch(err){
         console.error('Error -> $(err)');
     }
-}
+}]
