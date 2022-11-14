@@ -25,7 +25,7 @@ connect();
 
 async function connect(){
 
-    const queue = "Algoritmos";
+    const queue = "Algoritmo";
     const Universidad = "UTESA"
 
      
@@ -50,7 +50,9 @@ async function connect(){
                 channel.ack(message);
                 console.log("Mensaje borrado de la cola... \n");
                 
-            } 
+            }  else{
+                console.log("This message is not for me , I wont delete it");
+            }
 
         })
 
