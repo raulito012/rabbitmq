@@ -26,23 +26,21 @@ connect();
 async function connect(){
 
     const queue = "Algoritmos";
-    const newQueue = "Carreras";
 
     const msgs = [
         {   "name":"Jose R Quezada Bueno", "Universidad":"UTESA"},
-        {   "name":"Jose R Quezada Bueno", "Ciudad":"Santiago"},
     ]
 
     try{
         
         const conn = await amqp.connect(rabbitSettings);
-        console.log("Connection Created...");
+        console.log("Conexion creada...");
 
         const channel = await conn.createChannel();
-        console.log("Channel Created...");
+        console.log("Canal creado...");
 
         const res = await channel.assertQueue(queue);
-        console.log("Queue Created...");
+        console.log("Cola creada...");
 
         for(let msg in msgs){
             await channel.sendToQueue(queue, Buffer.from(JSON.stringify(msgs[msg])));
