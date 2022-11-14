@@ -1,6 +1,6 @@
 const amqp = require("amqplib");
 
-const rabbitSettings = {
+const rabbitSettings = [{
     protocol: 'amqp',
     hostname: 'localhost',
     port: 5672,
@@ -9,7 +9,17 @@ const rabbitSettings = {
     vhost: '/',
     authMechanism: ['PLAIN','AMQPLAIN','EXTERNAL']
 
-}
+},
+{
+    protocol: 'amqp',
+    hostname: 'localhost',
+    port: 5673,
+    username: 'guest',
+    password: 'guest',
+    vhost: '/',
+    authMechanism: ['PLAIN','AMQPLAIN','EXTERNAL']
+
+}]
 
 connect();
 
