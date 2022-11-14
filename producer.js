@@ -1,6 +1,6 @@
 const amqp = require("amqplib");
 
-const rabbitSettings = [{
+const rabbitSettings = {
     protocol: 'amqp',
     hostname: 'localhost',
     port: 5672,
@@ -9,54 +9,38 @@ const rabbitSettings = [{
     vhost: '/',
     authMechanism: ['PLAIN','AMQPLAIN','EXTERNAL']
 
-},
-{
-    protocol: 'amqp',
-    hostname: 'localhost',
-    port: 5673,
-    username: 'guest',
-    password: 'guest',
-    vhost: '/',
-    authMechanism: ['PLAIN','AMQPLAIN','EXTERNAL']
+}
 
-}]
 connect();
 
 async function connect(){
 
-    const queue = "Algoritmos";
-    const newQueue = "Carreras";
+    const queue = "AP";
+    const newQueue = "Roles";
 
     const msgs = [
-        {   "name":"Jose R Quezada Bueno", "Universidad":"UTESA"},
-
+        {   "name":"Jose Quezada", "Universidad":"UTESA"},
+        {   "name":"Jose Quezada", "Ciudad":"Santiago"},
+        {   "name":"Jose Quezada", "Edad":"22"},
+        {   "name":"Jose Quezada", "Carrera":"Sistemas"},
     ]
 
     try{
-        
+
         const conn = await amqp.connect(rabbitSettings);
-        console.log("Connection Created...");
+        console.log("Se ha creado la conexion...");
 
         const channel = await conn.createChannel();
-        console.log("Channel Created...");
+        console.log("El canal ha sido creado...");
 
         const res = await channel.assertQueue(queue);
-        console.log("Queue Created...");
+        console.log("La cola ha sido creada...");
 
         for(let msg in msgs){
-            await channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg[msgs])));
-            console.log('Mensaje enviado a la cola ${queue}');
+            await channel.sendToQueue(queue, Buffer.from(JSON.stringify(msgs[msg])));
+            console.log('Los mensajes se han enviado a la cola: ${queue}');
         }
 
-        res = await channel.assertQueue(newQueue);
-        console.log("Queue Created...");
-
-        for(let msg in msgs){
-            await channel.sendToQueue(newQueue, Buffer.from(JSON.stringify(msgs[msg])));
-            console.log('Mensaje enviado a la cola ${newQueue}');
-        }
-
-        
 
 
     } catch(err){
