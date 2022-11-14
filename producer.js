@@ -30,9 +30,6 @@ async function connect(){
 
     const msgs = [
         {   "name":"Jose R Quezada Bueno", "Universidad":"UTESA"},
-        {   "name":"Jose R Quezada Bueno", "Ciudad":"Santiago"},
-        {   "name":"Jose R Quezada Bueno", "Edad":"22"},
-        {   "name":"Jose R Quezada Bueno", "Carrera":"Sistemas"},
     ]
 
     try{
